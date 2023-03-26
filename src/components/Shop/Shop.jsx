@@ -3,12 +3,19 @@ import Product from '../Product/Product';
 import './Shop.css'
 const Shop = () => {
     const [products, setProducts] = useState([])
+    const [cart, setCart] = useState([])
     useEffect(()=>{ /* annonymouse func which will run at any change */
-    fetch('../../../public/fakeData/products.json')
+    fetch('products.json')
     .then(res => res.json())
     .then(data => setProducts(data)) /* data setProducts e set korle data jodi fetch hoy tahole products e pabo */
     },[]) /* empty array for showing after loading component  */
     
+    const handleAddToCart =(product)=>{
+        // console.log('added product', product.name)
+        const newCart = [...cart, product]
+        setCart(newCart)
+    }
+
     return (
         <div className='shop-container'>
             <div className="products-container">
@@ -16,11 +23,14 @@ const Shop = () => {
             {
                 products.map((product)=> <Product 
                 product={product} /* Product component e product ke pathailam */
-                key={product.id}></Product>)
+                key={product.id}
+                handleAddToCart={handleAddToCart}
+                ></Product>)
             }
             </div>
             <div className="cart-container">
                 <h4>Order Summary</h4>
+                <p>Selected Items : {cart.length}</p>
             </div>
         </div>
     );
