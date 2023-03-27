@@ -1,0 +1,9 @@
+.cart{
+    background-color: #FFE0B3;
+    padding: 25px;
+    position: sticky;
+    top: 0;
+}
+.cart h6{
+    font-size: 17px;
+}
